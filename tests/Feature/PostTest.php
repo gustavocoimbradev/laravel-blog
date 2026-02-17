@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Author;
+use App\Models\Post;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(RefreshDatabase::class);
@@ -12,4 +13,10 @@ test('should create a new post', function(){
     $response->assertStatus(302);
     $this->assertDatabaseHas('posts', $data);
     $response->assertRedirect(route('all-posts'));
+});
+
+test('should fetch all posts', function(){
+    Post::factory(10)->count(5)->create();
+    $response = $this->get(route('all-posts'));
+    $response->assertStatus(200);
 });

@@ -13,4 +13,4 @@ Route::get('/authors', [AuthorController::class, 'index'])->name('all-authors');
 
 // Posts
 Route::post('/posts', [PostController::class, 'store'])->name('create-post');
-Route::get('/posts', [PostControlle::class, 'index'])->name('all-posts');
+Route::get('/posts', [PostController::class, 'index'])->name('all-posts');
