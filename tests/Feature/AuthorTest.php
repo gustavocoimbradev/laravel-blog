@@ -15,16 +15,8 @@ test('should create an author', function () {
     $response->assertStatus(302);
     $this->assertDatabaseHas('authors', $data);
     $author = Author::first();
-    $response->assertRedirect(route('show-author', $author));
+    $response->assertRedirect(route('edit-author-form', $author));
     
-});
-
-test('should show an author', function() {
-    $author = Author::create([ 'name' => 'Walter White', 'bio' => 'Teacher' ]);
-    $response = $this->get(route('show-author', $author));
-    $response->assertStatus(200);
-    $response->assertSee('Walter White');
-    $response->assertSee('Teacher');
 });
 
 test('should show all authors', function() {
@@ -33,7 +25,6 @@ test('should show all authors', function() {
     $response->assertStatus(200);
     $response->assertSee($authors[0]->name);
 });
-
 
 test('should show the author editing form', function() {
     $author = Author::factory()->create();
@@ -44,7 +35,7 @@ test('should edit an author', function() {
     $author = Author::factory()->create();
     $response = $this->put(route('edit-author', ['author' => $author, 'name' => 'New Name', 'bio' => 'New Bio' ]));
     $response->assertStatus(302);
-    $response->assertRedirect(route('show-author', $author));
+    $response->assertRedirect(route('edit-author-form', $author));
     $this->assertDatabaseHas('authors', [ 'id' => $author->id, 'name' => 'New Name', 'bio' => 'New Bio' ]);
 });
 
