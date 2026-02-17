@@ -14,8 +14,7 @@ test('should create an author', function () {
     $response = $this->post(route('create-author'), $data);
     $response->assertStatus(302);
     $this->assertDatabaseHas('authors', $data);
-    $author = Author::first();
-    $response->assertRedirect(route('edit-author-form', $author));
+    $response->assertRedirect(route('all-authors'));
     
 });
 

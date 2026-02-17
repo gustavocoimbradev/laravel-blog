@@ -24,8 +24,8 @@ class AuthorController extends Controller
     }
 
     public function store(StoreAuthorRequest $request, AuthorService $service) {
-        $author = $service->create($request->validated());
-        return to_route('edit-author-form', $author);
+        $service->create($request->validated());
+        return to_route('all-authors');
     }
 
     public function update(UpdateAuthorRequest $request, AuthorService $service, Author $author) {
